@@ -42,7 +42,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_drivetrainRightMotor1.setInverted(b_drivetrainRightMotor1Inverted); m_drivetrainRightMotor2.setInverted(b_drivetrainRightMotor2Inverted);
   }
 
-
+  //Encoderlar olmadığı için yazacak herhangi birşey yok şuanlık.
   @Override
   public void periodic() {}
 
