@@ -7,13 +7,13 @@ import frc.robot.Subsystems.DrivetrainSubsystem;
 
 public class ArcadeDriveCommand extends CommandBase {
 
-  private final DrivetrainSubsystem drivetrainSubsystem;
+  private final DrivetrainSubsystem ds_drivetrainSubsystem;
 
   //Supplier kullanılmasının sebebi bize daha çok esneklik sağlaması.
-  private final Supplier<Double> speedFunction, turnFunction;
+  private final Supplier<Double> f_speedFunction, f_turnFunction;
 
   public ArcadeDriveCommand(DrivetrainSubsystem drivetrainSubsystem, Supplier<Double> speedFunction, Supplier<Double> turnFunction) {
-    this.drivetrainSubsystem = drivetrainSubsystem; this.speedFunction = speedFunction; this.turnFunction = turnFunction;
+    this.ds_drivetrainSubsystem = drivetrainSubsystem; this.f_speedFunction = speedFunction; this.f_turnFunction = turnFunction;
     addRequirements(drivetrainSubsystem);
   }
 
@@ -26,7 +26,7 @@ public class ArcadeDriveCommand extends CommandBase {
   //Basit bir komut, sıkıntı varsa haber verin.
   @Override
   public void execute() {
-    drivetrainSubsystem.arcadeDrive(speedFunction.get(), turnFunction.get());
+    ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get(), f_turnFunction.get());
   }
 
   //Aynısını komutun sonu için de yapalım (Ki fonksiyonun şuanlık sonu olmamalı, sonra değişebilir.)
