@@ -17,29 +17,29 @@ public class DrivetrainSubsystem extends SubsystemBase {
   Constants dosyasındaki gerekli yeri değiştireceksiniz.*/
   
   //Invert durumları, DrivetrainSubsystem constructorunda kullanılacaklar.
-  private boolean b_leftMotor1Inverted, b_leftMotor2Inverted, b_rightMotor1Inverted, b_rightMotor2Inverted;
+  private boolean b_drivetrainLeftMotor1Inverted, b_drivetrainLeftMotor2Inverted, b_drivetrainRightMotor1Inverted, b_drivetrainRightMotor2Inverted;
 
   //MotorController tanımlamaları, ID değiştirmek için Constants dosyasındaki DrivetrainConstants Classına Bakın.
-  private CANSparkMax m_leftMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor1ID, MotorType.kBrushed);
-  private CANSparkMax m_leftMotor2 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor2ID, MotorType.kBrushed);
-  private CANSparkMax m_rightMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainRightMotor1ID, MotorType.kBrushed);
-  private CANSparkMax m_rightMotor2 = new CANSparkMax(DrivetrainConstants.c_drivetrainRightMotor2ID, MotorType.kBrushed);
+  private CANSparkMax m_drivetrainLeftMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor1ID, MotorType.kBrushed);
+  private CANSparkMax m_drivetrainLeftMotor2 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor2ID, MotorType.kBrushed);
+  private CANSparkMax m_drivetrainRightMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainRightMotor1ID, MotorType.kBrushed);
+  private CANSparkMax m_drivetrainRightMotor2 = new CANSparkMax(DrivetrainConstants.c_drivetrainRightMotor2ID, MotorType.kBrushed);
 
   //MotorControllerGroup tanımlamaları, her taraf için bir tane.
-  private MotorControllerGroup mcg_leftMotorControllerGroup = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
-  private MotorControllerGroup mcg_rightMotorControllerGroup = new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
+  private MotorControllerGroup mcg_drivetrainLeftMotorControllerGroup = new MotorControllerGroup(m_drivetrainLeftMotor1, m_drivetrainLeftMotor2);
+  private MotorControllerGroup mcg_drivetrainRightMotorControllerGroup = new MotorControllerGroup(m_drivetrainRightMotor1, m_drivetrainRightMotor2);
 
   //DifferentialDrive tanımlamaları, robotun hareketi için.
-  private DifferentialDrive dd_differentialDrive = new DifferentialDrive(mcg_leftMotorControllerGroup, mcg_rightMotorControllerGroup);
+  private DifferentialDrive dd_differentialDrive = new DifferentialDrive(mcg_drivetrainLeftMotorControllerGroup, mcg_drivetrainRightMotorControllerGroup);
 
   public DrivetrainSubsystem(boolean leftMotor1Inverted, boolean leftMotor2Inverted, boolean rightMotor1Inverted, boolean rightMotor2Inverted) {
     //Constructordan alıyoruz bunları.
-    this.b_leftMotor1Inverted = leftMotor1Inverted; this.b_leftMotor2Inverted = leftMotor2Inverted;
-    this.b_rightMotor1Inverted = rightMotor1Inverted; this.b_rightMotor2Inverted = rightMotor2Inverted;
+    this.b_drivetrainLeftMotor1Inverted = leftMotor1Inverted; this.b_drivetrainLeftMotor2Inverted = leftMotor2Inverted;
+    this.b_drivetrainRightMotor1Inverted = rightMotor1Inverted; this.b_drivetrainRightMotor2Inverted = rightMotor2Inverted;
     
     //Sonra motorları buna göre invertliyoruz.
-    m_leftMotor1.setInverted(b_leftMotor1Inverted); m_leftMotor2.setInverted(b_leftMotor2Inverted);
-    m_rightMotor1.setInverted(b_rightMotor1Inverted); m_rightMotor2.setInverted(b_rightMotor2Inverted);
+    m_drivetrainLeftMotor1.setInverted(b_drivetrainLeftMotor1Inverted); m_drivetrainLeftMotor2.setInverted(b_drivetrainLeftMotor2Inverted);
+    m_drivetrainRightMotor1.setInverted(b_drivetrainRightMotor1Inverted); m_drivetrainRightMotor2.setInverted(b_drivetrainRightMotor2Inverted);
   }
 
 
@@ -53,26 +53,26 @@ public class DrivetrainSubsystem extends SubsystemBase {
   robotu yanlışlıkla patlatmayalım!*/
   public void setLeftMotorControllerSpeed(double speed){
     if(speed < -1){
-      mcg_leftMotorControllerGroup.set(-1);
+      mcg_drivetrainLeftMotorControllerGroup.set(-1);
     }
     else if(speed > 1){
-      mcg_leftMotorControllerGroup.set(1);
+      mcg_drivetrainLeftMotorControllerGroup.set(1);
     }
     else{
-      mcg_leftMotorControllerGroup.set(speed);
+      mcg_drivetrainLeftMotorControllerGroup.set(speed);
     }
   }
 
   //Burası Dahil.
   public void setRightMotorControllerSpeed(double speed){
     if(speed < -1){
-      mcg_rightMotorControllerGroup.set(-1);
+      mcg_drivetrainRightMotorControllerGroup.set(-1);
     }
     else if(speed > 1){
-      mcg_rightMotorControllerGroup.set(1);
+      mcg_drivetrainRightMotorControllerGroup.set(1);
     }
     else{
-      mcg_rightMotorControllerGroup.set(speed);
+      mcg_drivetrainRightMotorControllerGroup.set(speed);
     }
   }
 

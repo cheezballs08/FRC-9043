@@ -16,21 +16,21 @@ import frc.robot.Subsystems.ShooterSubsystem;
 public class RobotContainer {
 
   //Xbox Controller tanımlaması.
-  XboxController xboxController = new XboxController(ControllerConstants.xboxControllerID);
+  XboxController xc_xboxController = new XboxController(ControllerConstants.xboxControllerID);
   
   //Alt sistemlerin tanımlamaları.
-  ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
-  IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  ClimberSubsystem cs__climberSubsystem = new ClimberSubsystem();
+  DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
+  IntakeSubsystem is_intakeSubsystem = new IntakeSubsystem();
+  ShooterSubsystem ss_shooterSubsystem = new ShooterSubsystem(false, false);
 
   //Komut tanımlamaları
   /*Bu gördüğünüz () -> ifadesi lambda ifadeleri olarak geçiyor, zamanında supplier kullandığımız için Java bizden argüman olarak
   fonksiyon istiyor, biz de argümanımızı fonksiyona çevirmek için lambda ifadeleri kullandık, sonuçta lambda ifadeleri birer fonksiyondur.*/
-  ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand(drivetrainSubsystem, () -> xboxController.getLeftX(), () -> xboxController.getLeftY());
+  ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand(ds_drivetrainSubsystem, () -> xc_xboxController.getLeftX(), () -> xc_xboxController.getLeftY());
 
   public RobotContainer() {
-    drivetrainSubsystem.setDefaultCommand(arcadeDriveCommand);
+    ds_drivetrainSubsystem.setDefaultCommand(arcadeDriveCommand);
     configureBindings();
   }
 
