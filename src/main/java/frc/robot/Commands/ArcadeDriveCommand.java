@@ -7,6 +7,7 @@ import frc.robot.Subsystems.DrivetrainSubsystem;
 
 public class ArcadeDriveCommand extends CommandBase {
 
+  //Subsystemi ekliyelim
   private final DrivetrainSubsystem ds_drivetrainSubsystem;
 
   //Supplier kullanılmasının sebebi bize daha çok esneklik sağlaması.
