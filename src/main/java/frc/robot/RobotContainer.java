@@ -19,7 +19,7 @@ public class RobotContainer {
   
   //Alt sistemlerin tanımlamaları.
   DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
-  IntakeSubsystem is_intakeSubsystem = new IntakeSubsystem();
+  IntakeSubsystem is_intakeSubsystem = new IntakeSubsystem(false);
   ShooterSubsystem ss_shooterSubsystem = new ShooterSubsystem(false, false);
 
   //Komut tanımlamaları
