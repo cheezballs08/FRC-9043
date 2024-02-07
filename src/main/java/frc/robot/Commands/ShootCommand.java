@@ -21,6 +21,8 @@ public class ShootCommand extends CommandBase {
 
   @Override
   public void initialize() {
+    //Başlangıçta motorların hızını resetliyelim.
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(0);
     System.out.println("SHOOT COMMAND ACTIVATED");
   }
 
@@ -33,6 +35,8 @@ public class ShootCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    //Ve sonda da motorların hızını resetliyelim ki bitince sonsuza kadar gitmesin.
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(0);
     System.out.println("SHOOT COMMAND ENDED");
   }
 
