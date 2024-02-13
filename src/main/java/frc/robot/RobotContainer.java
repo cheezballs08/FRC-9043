@@ -1,14 +1,34 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+/*Burası önemli bir yer, lütfen burası ile sadece yeni komut ekliyor veya eski komutlardaki
+bugları değiştiriyorsanız oynayın!*/
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.Commands.ArcadeDriveCommand;
+import frc.robot.Constants.ControllerConstants;
+import frc.robot.Subsystems.DrivetrainSubsystem;
+import frc.robot.Subsystems.IntakeSubsystem;
+import frc.robot.Subsystems.ShooterSubsystem;
 
 public class RobotContainer {
+
+  //Xbox Controller tanımlaması.
+  XboxController xc_xboxController = new XboxController(ControllerConstants.xboxControllerID);
+  
+  //Alt sistemlerin tanımlamaları.
+  DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
+  IntakeSubsystem is_intakeSubsystem = new IntakeSubsystem(false);
+  ShooterSubsystem ss_shooterSubsystem = new ShooterSubsystem(false, false);
+
+  //Komut tanımlamaları
+  /*Bu gördüğünüz () -> ifadesi lambda ifadeleri olarak geçiyor, zamanında supplier kullandığımız için Java bizden argüman olarak
+  fonksiyon istiyor, biz de argümanımızı fonksiyona çevirmek için lambda ifadeleri kullandık, sonuçta lambda ifadeleri birer fonksiyondur.*/
+  ArcadeDriveCommand arcadeDriveCommand = new ArcadeDriveCommand(ds_drivetrainSubsystem, () -> xc_xboxController.getLeftX(), () -> xc_xboxController.getLeftY());
+
   public RobotContainer() {
+    ds_drivetrainSubsystem.setDefaultCommand(arcadeDriveCommand);
     configureBindings();
   }
 
