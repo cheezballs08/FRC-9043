@@ -11,6 +11,8 @@ import frc.robot.Constants.ControllerConstants;
 import frc.robot.Subsystems.DrivetrainSubsystem;
 import frc.robot.Subsystems.IntakeSubsystem;
 import frc.robot.Subsystems.ShooterSubsystem;
+import frc.robot.Subsystems.ClimberSubsystem;
+
 
 public class RobotContainer {
 
@@ -21,7 +23,8 @@ public class RobotContainer {
   DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
   IntakeSubsystem is_intakeSubsystem = new IntakeSubsystem(false);
   ShooterSubsystem ss_shooterSubsystem = new ShooterSubsystem(false, false);
-
+  ClimberSubsystem cs_climberSubsystem = new ClimberSubsystem(false,false);
+;
   //Komut tanımlamaları
   /*Bu gördüğünüz () -> ifadesi lambda ifadeleri olarak geçiyor, zamanında supplier kullandığımız için Java bizden argüman olarak
   fonksiyon istiyor, biz de argümanımızı fonksiyona çevirmek için lambda ifadeleri kullandık, sonuçta lambda ifadeleri birer fonksiyondur.*/
