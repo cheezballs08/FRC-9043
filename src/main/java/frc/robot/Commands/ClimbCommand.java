@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Subsystems.ClimberSubsystem;
 
-public class ClimberCommand extends CommandBase {
+public class ClimbCommand extends CommandBase {
 
   ClimberSubsystem cs_climberSubsystem;
 
-  public ClimberCommand(ClimberSubsystem climberSubsystem) {
+  public ClimbCommand(ClimberSubsystem climberSubsystem) {
     this.cs_climberSubsystem = climberSubsystem;
   }
 
@@ -20,12 +20,12 @@ public class ClimberCommand extends CommandBase {
 
   @Override
   public void execute() {
-    is_climberSubsystem.setClimberMotorControllerGroupSpeed(climberConstants.c_climberMotorSpeed);
+    cs_climberSubsystem.setClimberMotorControllerGroupSpeed(ClimberConstants.c_climberMotorSpeed);
   }
 
   @Override
   public void end(boolean interrupted) {
-    is_climberSubsystem.setClimberMotorControllerGroupSpeed(0);
+    cs_climberSubsystem.setClimberMotorControllerGroupSpeed(0);
   }
 
   @Override
