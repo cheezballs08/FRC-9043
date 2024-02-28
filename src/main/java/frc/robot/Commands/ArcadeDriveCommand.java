@@ -15,7 +15,7 @@ public class ArcadeDriveCommand extends CommandBase {
 
   public ArcadeDriveCommand(DrivetrainSubsystem drivetrainSubsystem, Supplier<Double> speedFunction, Supplier<Double> turnFunction) {
     this.ds_drivetrainSubsystem = drivetrainSubsystem; this.f_speedFunction = speedFunction; this.f_turnFunction = turnFunction;
-    addRequirements(drivetrainSubsystem);
+    addRequirements(ds_drivetrainSubsystem);
   }
 
   //Başlangıçta ufak bir feedback.

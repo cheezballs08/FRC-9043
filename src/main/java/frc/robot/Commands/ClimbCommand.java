@@ -11,6 +11,7 @@ public class ClimbCommand extends CommandBase {
 
   public ClimbCommand(ClimberSubsystem climberSubsystem) {
     this.cs_climberSubsystem = climberSubsystem;
+    addRequirements(cs_climberSubsystem);
   }
 
   @Override

@@ -11,6 +11,7 @@ public class IntakeCommand extends CommandBase {
 
   public IntakeCommand(IntakeSubsystem intakeSubsystem) {
     this.is_intakeSubsystem = intakeSubsystem;
+    addRequirements(is_intakeSubsystem);
   }
 
   @Override

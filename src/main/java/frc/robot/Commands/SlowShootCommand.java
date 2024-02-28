@@ -16,6 +16,7 @@ public class SlowShootCommand extends CommandBase {
 
   public SlowShootCommand(ShooterSubsystem shooterSubsystem) {
     this.ss_shooterSubsystem = shooterSubsystem;
+    addRequirements(ss_shooterSubsystem);
   }
 
 

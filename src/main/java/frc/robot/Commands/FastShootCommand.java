@@ -16,6 +16,7 @@ public class FastShootCommand extends CommandBase {
 
   public FastShootCommand(ShooterSubsystem shooterSubsystem) {
     this.ss_shooterSubsystem = shooterSubsystem;
+    addRequirements(ss_shooterSubsystem);
   }
 
 
