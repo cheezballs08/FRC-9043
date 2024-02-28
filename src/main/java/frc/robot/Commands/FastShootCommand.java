@@ -8,13 +8,13 @@ import frc.robot.Constants.ShooterConstants;
 //Basit importlar.
 import frc.robot.Subsystems.ShooterSubsystem;
 
-public class ShootCommand extends CommandBase {
+public class FastShootCommand extends CommandBase {
 
   //Subsystemi ekliyelim
   private ShooterSubsystem ss_shooterSubsystem;
   
 
-  public ShootCommand(ShooterSubsystem shooterSubsystem) {
+  public FastShootCommand(ShooterSubsystem shooterSubsystem) {
     this.ss_shooterSubsystem = shooterSubsystem;
   }
 
@@ -29,7 +29,7 @@ public class ShootCommand extends CommandBase {
   //Hızı ayarlıyoruz.
   @Override
   public void execute() {
-    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterMotorControllerGroupSpeed);
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed);
   }
 
 

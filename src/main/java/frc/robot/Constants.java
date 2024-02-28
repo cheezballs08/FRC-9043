@@ -16,7 +16,8 @@ public class Constants {
     public class ShooterConstants{
         public static final int c_shooterMotor1ID = 0;
         public static final int c_shooterMotor2ID = 0;
-        public static final double c_shooterMotorControllerGroupSpeed = 0;
+        public static final double c_shooterFastMotorControllerGroupSpeed = 0;
+        public static final double c_shooterSlowMotorControllerGroupSpeed = 0;
     }
 
     public class IntakeConstants{
