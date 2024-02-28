@@ -16,7 +16,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void initialize() {
     is_intakeSubsystem.setIntakeMotorSpeed(0);
-    
+    System.out.println("INTAKE COMMAND ACTIVE");
   }
 
   @Override
@@ -28,6 +28,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     is_intakeSubsystem.setIntakeMotorSpeed(0);
+    System.out.println("INTAKE COMMAND DEACTIVE");
   }
 
 
