@@ -3,10 +3,10 @@ bugları değiştiriyorsanız oynayın!*/
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.ArcadeDriveCommand;
 import frc.robot.Commands.ClimbCommand;
 import frc.robot.Commands.FastShootCommand;
@@ -24,7 +24,10 @@ public class RobotContainer {
   //COMMAND (Önemli) Xbox Controller tanımlaması. Command olmasında dikkat ediniz.
   CommandXboxController cxc_commandXboxController = new CommandXboxController(ControllerConstants.c_commandXboxControllerID);
 
-  //Triggerlar için CommandXboxControllardaki butonları ayarlıyalım
+  //Triggerları tanımlayalım, şuan ney neye gidiyo bilmiyorum deneme yanılma ile hallederiz :D
+  Trigger t_rightTopTrigger =  cxc_commandXboxController.rightTrigger(0.2);
+  Trigger t_rightBottomTrigger = cxc_commandXboxController.button(0);
+  Trigger t_leftBottomTrigger = cxc_commandXboxController.button(0);
 
   //Alt sistemlerin tanımlamaları.
   DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false);
@@ -46,7 +49,11 @@ public class RobotContainer {
     configureBindings();
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+    t_leftBottomTrigger.whileTrue(ic_intakeCommand);
+    t_rightBottomTrigger.whileTrue(fsc_fastShootCommand);
+    t_rightTopTrigger.whileTrue(ssc_slowShootCommand);
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
