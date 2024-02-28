@@ -10,7 +10,7 @@ public class Constants {
     }
     
     public class ControllerConstants{
-        public static final int xboxControllerID = 0;
+        public static final int c_commandXboxControllerID = 0;
     }
 
     public class ShooterConstants{
