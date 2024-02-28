@@ -16,6 +16,7 @@ public class ClimbCommand extends CommandBase {
   @Override
   public void initialize() {
     cs_climberSubsystem.setClimberMotorControllerGroupSpeed(0);
+    System.out.println("CLIMB COMMAND ACTIVE");
   }
 
   @Override
@@ -26,6 +27,7 @@ public class ClimbCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     cs_climberSubsystem.setClimberMotorControllerGroupSpeed(0);
+    System.out.println("CLIMB COMMAND DEACTIVE");
   }
 
   @Override
