@@ -30,7 +30,7 @@ public class FastShootCommand extends CommandBase {
   //Hızı ayarlıyoruz.
   @Override
   public void execute() {
-    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed*ShooterConstants.c_shooterMotorSpeedMultiplier);
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed);
   }
 
 

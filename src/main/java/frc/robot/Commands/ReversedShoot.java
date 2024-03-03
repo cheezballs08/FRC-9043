@@ -29,7 +29,7 @@ public class ReversedShoot extends CommandBase {
   //Hızı ayarlıyoruz.
   @Override
   public void execute() {
-    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed*ShooterConstants.c_shooterMotorSpeedMultiplier*-1);
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed*-0.3);
   }
 
 

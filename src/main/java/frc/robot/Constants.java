@@ -26,12 +26,6 @@ public class Constants {
     public class IntakeConstants{
         public static final int c_intakeMotorID = 0;
         public static final double c_intakeMotorSpeed = 0;
+        public static final double c_intakeMotorSpeedMultiplier = 0;
     }
-
-    public class ClimberConstants{
-        public static final int c_climberMotor1ID = 0;
-        public static final int c_climberMotor2ID = 0;
-        public static final double c_climberMotorSpeed = 0;
-    }
-    
 }
