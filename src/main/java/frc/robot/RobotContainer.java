@@ -25,11 +25,6 @@ public class RobotContainer {
   Trigger t_rightTopTrigger =  cxc_commandXboxController.button(0);
   Trigger t_rightBottomTrigger = cxc_commandXboxController.button(0);
   Trigger t_leftBottomTrigger = cxc_commandXboxController.button(0);
-  Trigger t_xButtonTrigger = cxc_commandXboxController.x();
-  Trigger t_aButtonTrigger = cxc_commandXboxController.a();
-  Trigger t_bButtonTrigger = cxc_commandXboxController.b();
-  Trigger t_yButtonTrigger = cxc_commandXboxController.y();
-
 
   //Alt sistemlerin tanımlamaları.
   DrivetrainSubsystem ds_drivetrainSubsystem = new DrivetrainSubsystem(false, false, false, false, cxc_commandXboxController);

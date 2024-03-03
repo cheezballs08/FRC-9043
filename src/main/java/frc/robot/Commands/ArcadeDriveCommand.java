@@ -14,6 +14,9 @@ public class ArcadeDriveCommand extends CommandBase {
   //Supplier kullanılmasının sebebi bize daha çok esneklik sağlaması.
   private final Supplier<Double> f_speedFunction, f_turnFunction;
 
+  //Ve gearlar için bir ortak double değeri
+  double d_arcadeDriveSpeedMultiplier = 1;
+
   public ArcadeDriveCommand(DrivetrainSubsystem drivetrainSubsystem, Supplier<Double> speedFunction, Supplier<Double> turnFunction) {
     this.ds_drivetrainSubsystem = drivetrainSubsystem; this.f_speedFunction = speedFunction; this.f_turnFunction = turnFunction;
     addRequirements(ds_drivetrainSubsystem);
@@ -29,11 +32,12 @@ public class ArcadeDriveCommand extends CommandBase {
   @Override
   public void execute() {
     if(ds_drivetrainSubsystem.getGearStatus(1)){
-      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear1Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+      d_arcadeDriveSpeedMultiplier = DrivetrainConstants.c_arcadeDriveGear1Multiplier;
     }
     else if(ds_drivetrainSubsystem.getGearStatus(2)){
-      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear2Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+      d_arcadeDriveSpeedMultiplier = DrivetrainConstants.c_arcadeDriveGear2Multiplier;
     }
+    ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*d_arcadeDriveSpeedMultiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
   }
 
   //Aynısını komutun sonu için de yapalım (Ki fonksiyonun şuanlık sonu olmamalı, sonra değişebilir.)

@@ -9,8 +9,6 @@ public class Constants {
         public static final int c_drivetrainRightMotor2ID = 0;
         public static final double c_arcadeDriveGear1Multiplier = 0;
         public static final double c_arcadeDriveGear2Multiplier = 0;
-        public static final double c_arcadeDriveGear3Multiplier = 0;
-        public static final double c_arcadeDriveGear4Multiplier = 0;
         public static final double c_arcadeDriveTurnMultipiler = 0;
     }
     
