@@ -3,6 +3,7 @@ package frc.robot.Commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Subsystems.DrivetrainSubsystem;
 
 public class ArcadeDriveCommand extends CommandBase {
@@ -27,7 +28,18 @@ public class ArcadeDriveCommand extends CommandBase {
   //Basit bir komut, sıkıntı varsa haber verin.
   @Override
   public void execute() {
-    ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get(), f_turnFunction.get());
+    if(ds_drivetrainSubsystem.getGearStatus(1)){
+      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear1Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+    }
+    else if(ds_drivetrainSubsystem.getGearStatus(2)){
+      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear2Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+    }
+    else if(ds_drivetrainSubsystem.getGearStatus(3)){
+      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear3Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+    }
+    else if(ds_drivetrainSubsystem.getGearStatus(4)){
+      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear4Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
+    }
   }
 
   //Aynısını komutun sonu için de yapalım (Ki fonksiyonun şuanlık sonu olmamalı, sonra değişebilir.)

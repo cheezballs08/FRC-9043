@@ -4,10 +4,11 @@ package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DrivetrainConstants;
 //Basit importlar.
 
@@ -18,6 +19,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
   
   //Invert durumları, DrivetrainSubsystem constructorunda kullanılacaklar.
   private boolean b_drivetrainLeftMotor1Inverted, b_drivetrainLeftMotor2Inverted, b_drivetrainRightMotor1Inverted, b_drivetrainRightMotor2Inverted;
+
+  //Gear durumları, CommandXboxControllerdaki 4 buton kullanılacaktır
+  public boolean b_gear2Active, b_gear3Active, b_gear4Active = false;
+  public boolean b_gear1Active = true;
+
+  //CommandXboxController tanımlaması
+  CommandXboxController cxc_commandXboxController;
+
+  //Trigger Tanımlamaları
+  Trigger t_xButtonTrigger = cxc_commandXboxController.x();
+  Trigger t_aButtonTrigger = cxc_commandXboxController.a();
+  Trigger t_bButtonTrigger = cxc_commandXboxController.b();
+  Trigger t_yButtonTrigger = cxc_commandXboxController.y();
 
   //MotorController tanımlamaları, ID değiştirmek için Constants dosyasındaki DrivetrainConstants Classına Bakın.
   private CANSparkMax m_drivetrainLeftMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor1ID, MotorType.kBrushed);
@@ -32,7 +46,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   //DifferentialDrive tanımlamaları, robotun hareketi için.
   private DifferentialDrive dd_differentialDrive = new DifferentialDrive(mcg_drivetrainLeftMotorControllerGroup, mcg_drivetrainRightMotorControllerGroup);
 
-  public DrivetrainSubsystem(boolean leftMotor1Inverted, boolean leftMotor2Inverted, boolean rightMotor1Inverted, boolean rightMotor2Inverted) {
+  public DrivetrainSubsystem(boolean leftMotor1Inverted, boolean leftMotor2Inverted, boolean rightMotor1Inverted, boolean rightMotor2Inverted, CommandXboxController commandXboxController) {
     //Constructordan alıyoruz bunları.
     this.b_drivetrainLeftMotor1Inverted = leftMotor1Inverted; this.b_drivetrainLeftMotor2Inverted = leftMotor2Inverted;
     this.b_drivetrainRightMotor1Inverted = rightMotor1Inverted; this.b_drivetrainRightMotor2Inverted = rightMotor2Inverted;
@@ -40,11 +54,28 @@ public class DrivetrainSubsystem extends SubsystemBase {
     //Sonra motorları buna göre invertliyoruz.
     m_drivetrainLeftMotor1.setInverted(b_drivetrainLeftMotor1Inverted); m_drivetrainLeftMotor2.setInverted(b_drivetrainLeftMotor2Inverted);
     m_drivetrainRightMotor1.setInverted(b_drivetrainRightMotor1Inverted); m_drivetrainRightMotor2.setInverted(b_drivetrainRightMotor2Inverted);
+
+    //Bu da command Xbox Controller tanımlaması
+    this.cxc_commandXboxController = commandXboxController;
   }
 
-  //Encoderlar olmadığı için yazacak herhangi birşey yok şuanlık.
+  /*Şimdi gearlar ile uğraşacağız, eğer gearlardan biri true ise diğer üçünün false olması lazım, burada da bunu uyguluyoruz. */
   @Override
-  public void periodic() {}
+  public void periodic() {
+    if(t_xButtonTrigger.getAsBoolean()){
+      b_gear1Active = true;
+    }
+    else if(t_aButtonTrigger.getAsBoolean()){
+      b_gear2Active = true;
+    }
+    else if(t_bButtonTrigger.getAsBoolean()){
+      b_gear3Active = true;
+    }
+    else if(t_yButtonTrigger.getAsBoolean()){
+      b_gear4Active = true;
+    }
+    updateGearStatus();
+  }
 
   /*Aşağıda MotorControllerGroupların hızını ayarlamak istersek diye iki metod yazdım. Biri sol için biri sağ için.
   Gerekli yerlerde kullanın veya yenilerini ekleyin.*/
@@ -85,4 +116,61 @@ public class DrivetrainSubsystem extends SubsystemBase {
     dd_differentialDrive.arcadeDrive(speed, turn);
   }
 
+  //Gearların durumunu güncelleyen bir metod
+  public void updateGearStatus(){
+    if (b_gear1Active){
+      b_gear2Active = false;
+      b_gear4Active = false;
+      b_gear4Active = false;
+    }
+  else if (b_gear2Active){
+      b_gear1Active = false;
+      b_gear4Active = false;
+      b_gear4Active = false;
+    }
+  else if (b_gear4Active){
+      b_gear1Active = false;
+      b_gear2Active = false;
+      b_gear4Active = false;
+    }
+  else if (b_gear4Active){
+      b_gear1Active = false;
+      b_gear2Active = false;
+      b_gear4Active = false;
+    } 
+  }
+
+  /* durumunu bize geri bildiren metod. Eğer Girilen GearID geçerli değil ise gear1Activeyi returnlar. Switch kullanabilirdim ama
+  üşendim*/
+  public boolean getGearStatus(int gearID){
+    if(gearID == 1){
+      return b_gear1Active;
+    }
+    else if(gearID == 2){
+      return b_gear2Active;
+    }
+    else if(gearID == 3){
+      return b_gear3Active;
+    }
+    else if (gearID == 4){
+      return b_gear4Active;
+    }
+    return b_gear1Active;
+  }
+
+  //Bu da gearların değerlerini değiştirmek için olan bi fonksiyon
+  public void changeGearStatus(int gearID, boolean value){
+    if(gearID == 1){
+      b_gear1Active = value;
+    }
+    else if(gearID == 2){
+      b_gear2Active = value;
+    }
+    else if(gearID == 3){
+      b_gear3Active = value;
+    }
+    else if (gearID == 4){
+      b_gear4Active = value;
+    }
+  }
 }
