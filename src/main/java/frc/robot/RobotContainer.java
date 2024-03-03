@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.ArcadeDriveCommand;
 import frc.robot.Commands.FastShootCommand;
 import frc.robot.Commands.IntakeCommand;
+import frc.robot.Commands.ReversedShoot;
 import frc.robot.Commands.SlowShootCommand;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Subsystems.DrivetrainSubsystem;
@@ -24,6 +25,7 @@ public class RobotContainer {
   //Triggerları tanımlayalım, şuan ney neye gidiyo bilmiyorum deneme yanılma ile hallederiz :D
   Trigger t_rightTopTrigger =  cxc_commandXboxController.button(0);
   Trigger t_rightBottomTrigger = cxc_commandXboxController.button(0);
+  Trigger t_leftTopTrigger = cxc_commandXboxController.button(0);
   Trigger t_leftBottomTrigger = cxc_commandXboxController.button(0);
 
   //Alt sistemlerin tanımlamaları.
@@ -39,14 +41,16 @@ public class RobotContainer {
   FastShootCommand fsc_fastShootCommand = new FastShootCommand(ss_shooterSubsystem);
   IntakeCommand ic_intakeCommand = new IntakeCommand(is_intakeSubsystem);
   SlowShootCommand ssc_slowShootCommand = new SlowShootCommand(ss_shooterSubsystem);
+  ReversedShoot rs_reversedShootCommand = new ReversedShoot(ss_shooterSubsystem);
 
   public RobotContainer() {
     ds_drivetrainSubsystem.setDefaultCommand(adc_arcadeDriveCommand);
     configureBindings();
   }
-
+  
   private void configureBindings() {
     t_leftBottomTrigger.whileTrue(ic_intakeCommand);
+    t_leftTopTrigger.whileTrue(rs_reversedShootCommand);
     t_rightBottomTrigger.whileTrue(fsc_fastShootCommand);
     t_rightTopTrigger.whileTrue(ssc_slowShootCommand);
   }

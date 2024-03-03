@@ -7,6 +7,7 @@ import frc.robot.Subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends CommandBase {
 
+  //Subsystem Tanımlamaları
   IntakeSubsystem is_intakeSubsystem;
 
   public IntakeCommand(IntakeSubsystem intakeSubsystem) {
@@ -22,7 +23,7 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    is_intakeSubsystem.setIntakeMotorSpeed(IntakeConstants.c_intakeMotorSpeed);
+    is_intakeSubsystem.setIntakeMotorSpeed(IntakeConstants.c_intakeMotorSpeed*IntakeConstants.c_intakeMotorSpeedMultiplier);
   }
 
 

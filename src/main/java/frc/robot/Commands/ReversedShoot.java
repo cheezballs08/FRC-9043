@@ -1,20 +1,19 @@
-/*ShootCommand, Aktif olduğu boyunca ShooterSubsystemdeki motorları
-önceden sabitlenmiş bir hızda çalıştırır. Çok da karmaşık değil.*/
+/*Tersine shoot yapan bir metod. */
 
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
-//Basit importlar.
 import frc.robot.Subsystems.ShooterSubsystem;
+//Basit importlar.
 
-public class FastShootCommand extends CommandBase {
+public class ReversedShoot extends CommandBase {
 
   //Subsystemi ekliyelim
   private ShooterSubsystem ss_shooterSubsystem;
   
 
-  public FastShootCommand(ShooterSubsystem shooterSubsystem) {
+  public ReversedShoot(ShooterSubsystem shooterSubsystem) {
     this.ss_shooterSubsystem = shooterSubsystem;
     addRequirements(ss_shooterSubsystem);
   }
@@ -24,13 +23,13 @@ public class FastShootCommand extends CommandBase {
   public void initialize() {
     //Başlangıçta motorların hızını resetliyelim.
     ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(0);
-    System.out.println("FAST SHOOT COMMAND ACTIVATED");
+    System.out.println("REVERSE COMMAND ACTIVATED");
   }
 
   //Hızı ayarlıyoruz.
   @Override
   public void execute() {
-    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed*ShooterConstants.c_shooterMotorSpeedMultiplier);
+    ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(ShooterConstants.c_shooterFastMotorControllerGroupSpeed*ShooterConstants.c_shooterMotorSpeedMultiplier*-1);
   }
 
 
@@ -38,7 +37,7 @@ public class FastShootCommand extends CommandBase {
   public void end(boolean interrupted) {
     //Ve sonda da motorların hızını resetliyelim ki bitince sonsuza kadar gitmesin.
     ss_shooterSubsystem.setShooterMotorControllerGroupSpeed(0);
-    System.out.println("FAST SHOOT COMMAND ENDED");
+    System.out.println("REVERSE SHOOT COMMAND ENDED");
   }
 
 

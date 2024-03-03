@@ -13,11 +13,11 @@ public class IntakeSubsystem extends SubsystemBase {
   //Constructor için tanımlama.
   private boolean b_intakeMotorInverted;
 
-  /*Motor fırçalı ve motorun IDsi değişmesi gerekirse constants daki gerekli yere bakın*/
-  private CANSparkMax m_intakeMotor = new CANSparkMax(IntakeConstants.c_intakeMotorID, MotorType.kBrushed);
+  /*Motor fırçasız ve motorun IDsi değişmesi gerekirse constants daki gerekli yere bakın*/
+  private CANSparkMax m_intakeMotor = new CANSparkMax(IntakeConstants.c_intakeMotorID, MotorType.kBrushless);
 
-  public IntakeSubsystem(boolean MotorInverted) {
-    this.b_intakeMotorInverted = MotorInverted;
+  public IntakeSubsystem(boolean motorInverted) {
+    this.b_intakeMotorInverted = motorInverted;
     m_intakeMotor.setInverted(b_intakeMotorInverted);
   }
 
