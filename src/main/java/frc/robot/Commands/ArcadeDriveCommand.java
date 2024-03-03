@@ -34,12 +34,6 @@ public class ArcadeDriveCommand extends CommandBase {
     else if(ds_drivetrainSubsystem.getGearStatus(2)){
       ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear2Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
     }
-    else if(ds_drivetrainSubsystem.getGearStatus(3)){
-      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear3Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
-    }
-    else if(ds_drivetrainSubsystem.getGearStatus(4)){
-      ds_drivetrainSubsystem.arcadeDrive(f_speedFunction.get()*DrivetrainConstants.c_arcadeDriveGear4Multiplier, f_turnFunction.get()*DrivetrainConstants.c_arcadeDriveTurnMultipiler);
-    }
   }
 
   //Aynısını komutun sonu için de yapalım (Ki fonksiyonun şuanlık sonu olmamalı, sonra değişebilir.)

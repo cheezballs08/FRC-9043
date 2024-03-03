@@ -29,9 +29,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //Trigger Tanımlamaları
   Trigger t_xButtonTrigger = cxc_commandXboxController.x();
-  Trigger t_aButtonTrigger = cxc_commandXboxController.a();
   Trigger t_bButtonTrigger = cxc_commandXboxController.b();
-  Trigger t_yButtonTrigger = cxc_commandXboxController.y();
 
   //MotorController tanımlamaları, ID değiştirmek için Constants dosyasındaki DrivetrainConstants Classına Bakın.
   private CANSparkMax m_drivetrainLeftMotor1 = new CANSparkMax(DrivetrainConstants.c_drivetrainLeftMotor1ID, MotorType.kBrushed);
@@ -64,17 +62,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void periodic() {
     if(t_xButtonTrigger.getAsBoolean()){
       b_gear1Active = true;
-    }
-    else if(t_aButtonTrigger.getAsBoolean()){
-      b_gear2Active = true;
+      b_gear2Active = false;
     }
     else if(t_bButtonTrigger.getAsBoolean()){
-      b_gear3Active = true;
+      b_gear2Active = true;
+      b_gear1Active = false;
     }
-    else if(t_yButtonTrigger.getAsBoolean()){
-      b_gear4Active = true;
-    }
-    updateGearStatus();
   }
 
   /*Aşağıda MotorControllerGroupların hızını ayarlamak istersek diye iki metod yazdım. Biri sol için biri sağ için.
@@ -116,46 +109,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
     dd_differentialDrive.arcadeDrive(speed, turn);
   }
 
-  //Gearların durumunu güncelleyen bir metod
-  public void updateGearStatus(){
-    if (b_gear1Active){
-      b_gear2Active = false;
-      b_gear4Active = false;
-      b_gear4Active = false;
-    }
-  else if (b_gear2Active){
-      b_gear1Active = false;
-      b_gear4Active = false;
-      b_gear4Active = false;
-    }
-  else if (b_gear4Active){
-      b_gear1Active = false;
-      b_gear2Active = false;
-      b_gear4Active = false;
-    }
-  else if (b_gear4Active){
-      b_gear1Active = false;
-      b_gear2Active = false;
-      b_gear4Active = false;
-    } 
-  }
-
   /* durumunu bize geri bildiren metod. Eğer Girilen GearID geçerli değil ise gear1Activeyi returnlar. Switch kullanabilirdim ama
   üşendim*/
   public boolean getGearStatus(int gearID){
     if(gearID == 1){
       return b_gear1Active;
     }
-    else if(gearID == 2){
+    else{
       return b_gear2Active;
     }
-    else if(gearID == 3){
-      return b_gear3Active;
-    }
-    else if (gearID == 4){
-      return b_gear4Active;
-    }
-    return b_gear1Active;
   }
 
   //Bu da gearların değerlerini değiştirmek için olan bi fonksiyon
@@ -163,14 +125,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     if(gearID == 1){
       b_gear1Active = value;
     }
-    else if(gearID == 2){
+    else{
       b_gear2Active = value;
-    }
-    else if(gearID == 3){
-      b_gear3Active = value;
-    }
-    else if (gearID == 4){
-      b_gear4Active = value;
     }
   }
 }
